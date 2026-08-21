@@ -11,20 +11,17 @@ const app = express()
 dotenv.config();
 connectDB();
 // middlewares
-app.use(cors({
-    origin: "https://tasktracker-frontend-virid.vercel.app/dashboard",
-    credentials: true,
-  }))
+app.use(cors())
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 
 
 app.use("/api/v1/registration",registrationRoutes)
 app.use("/api/v1/trackers",trackerRoutes)
-const PORT = process.env.PORT || 3000
+// const PORT = process.env.PORT || 3000
 
 // connection establish with server
-app.listen(PORT,() => {
+// app.listen(PORT,() => {
    
-    console.log("server started successfully on http://localhost:3000")
-})
+//     console.log("server started successfully on http://localhost:3000")
+// })
