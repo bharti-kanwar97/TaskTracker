@@ -11,7 +11,10 @@ const app = express()
 dotenv.config();
 connectDB();
 // middlewares
-app.use(cors())
+app.use(cors({
+    origin: "https://tasktracker-frontend-virid.vercel.app/dashboard",
+    credentials: true,
+  }))
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
 
