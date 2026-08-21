@@ -1,0 +1,144 @@
+/* =========================
+   FullCalendar Light Theme
+========================= */
+
+.fc {
+  font-family: inherit;
+  border: none;
+}
+
+.fc-theme-standard td,
+.fc-theme-standard th {
+  border: 1px solid #e5e7eb;
+}
+
+.fc-scrollgrid {
+  border: none !important;
+}
+
+/* Calendar background */
+.fc-daygrid-day {
+  background: #ffffff;
+}
+
+/* Date numbers */
+.fc .fc-daygrid-day-number {
+  color: #1e293b;
+  font-weight: 600;
+  padding: 10px;
+}
+
+/* Weekday names */
+.fc .fc-col-header-cell-cushion {
+  color: #334155;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* Month title */
+.fc .fc-toolbar-title {
+  color: #1A4560;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Today */
+.fc .fc-day-today {
+  background: #e0f2fe !important;
+}
+
+.fc .fc-day-today .fc-daygrid-day-number {
+  color: #2563eb;
+}
+
+/* Buttons */
+.fc .fc-button {
+  background: #1A4560 !important;
+  border: none !important;
+}
+
+.fc .fc-button:hover {
+  background: #16384e !important;
+}
+
+.fc .fc-button:focus {
+  box-shadow: none !important;
+}
+
+/* Events */
+.fc-event {
+  border: none !important;
+  border-radius: 8px;
+  padding: 2px 6px;
+  font-size: 13px;
+}
+.fc .fc-popover-header {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 3px 4px;
+}
+.fc-theme-standard .fc-popover-header {
+    background: #1A4560;
+    color: #fff;
+}
+.fc .fc-more-popover .fc-popover-body {
+    max-width: 120px;
+    padding: 10px;
+}
+/* =========================
+   Dark Theme
+========================= */
+
+.dark .fc {
+  background: #071426;
+  color: white;
+}
+
+.dark .fc-theme-standard td,
+.dark .fc-theme-standard th {
+  border-color: #233245;
+}
+
+.dark .fc-daygrid-day {
+  background: #071426;
+}
+
+.dark .fc .fc-daygrid-day-number {
+  color: white;
+}
+
+.dark .fc .fc-col-header-cell-cushion {
+  color: #cbd5e1;
+}
+
+.dark .fc .fc-toolbar-title {
+  color: white;
+}
+
+.dark .fc .fc-day-today {
+  background: #12314b !important;
+}
+
+.dark .fc .fc-day-today .fc-daygrid-day-number {
+  color: #a855f7;
+}
+
+.dark .fc .fc-button {
+  background: #1A4560 !important;
+  border: none !important;
+}
+
+.dark .fc .fc-button:hover {
+  background: #24567a !important;
+}
+
+/* Event colors in dark mode */
+.dark .fc-event {
+  color: white;
+}
+.completed-event .fc-event-title {
+  text-decoration: line-through;
+
+}
