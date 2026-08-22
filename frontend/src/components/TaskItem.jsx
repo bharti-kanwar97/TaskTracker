@@ -54,7 +54,7 @@ export default function TaskItem({ task }) {
           Delete
         </button>
       </div>
-      <div className="relative w-auto px-2  group-hover:flex items-center justify-center hidden">
+      <div className="relative w-auto px-2  group-hover:flex items-center justify-center sm:hidden">
         <button
           onClick={() => {
             setMoreOption(!moreOption);
