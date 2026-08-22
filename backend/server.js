@@ -25,3 +25,4 @@ app.use("/api/v1/trackers",trackerRoutes)
    
 //     console.log("server started successfully on http://localhost:3000")
 // })
+export default app;
