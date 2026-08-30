@@ -3,13 +3,24 @@ import { MdOutlineMoreHoriz } from "react-icons/md";
 import useTaskForm from "../hooks/useTaskForm";
 import useDeleteTask from "../hooks/useDeleteTask";
 import MoreOptions from "./MoreOptions";
-export default function TaskItem({ task }) {
+export default function TaskItem({ task,activeTaskId,setActiveTaskId }) {
   const { handleUpdate, handleCheckbox } = useTaskForm();
   const { handleDelete } = useDeleteTask();
   const [moreOption, setMoreOption] = useState(false);
+  // const [optionButton, setOptionButton] = useState(false);
+  const isActive = activeTaskId === task._id;
+ 
+  const handleTaskClick = (taskId) => {
+  setActiveTaskId(taskId);
+};
+
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-4 text-center bg-gray-100 dark:bg-[#131e3b] font-semibold p-3 rounded-lg group">
-      <label className="flex items-center  gap-1 sm:gap-2">
+  <div key={task._id}
+      onClick={() => handleTaskClick(task._id)}
+      className={isActive ? "active-row" : ""}>
+   
+    <div className="grid grid-cols-2 sm:grid-cols-4 text-center bg-gray-100 dark:bg-[#131e3b] font-semibold p-3 rounded-lg">
+      <label className="flex items-center  gap-0.5 sm:gap-2">
         <div className="w-auto px-2 py-2">
           <input
             type="checkbox"
@@ -54,19 +65,21 @@ export default function TaskItem({ task }) {
           Delete
         </button>
       </div>
-      <div className="relative w-auto px-2  group-hover:flex items-center justify-center sm:hidden">
+      {isActive && <div className="relative w-auto px-2 flex items-center justify-end sm:hidden">
         <button
           onClick={() => {
+            // setOptionButton(true)
             setMoreOption(!moreOption);
             console.log("click on more option button");
           }}
           
-          className="p-1.5 border-2 rounded-full cursor-pointer"
+          className="p-1.5"
         >
           <MdOutlineMoreHoriz className="text-2xl " />
         </button>
-        {moreOption && <MoreOptions />}
-      </div>
+        {moreOption && <MoreOptions task={task} setMoreOption={setMoreOption} />}
+      </div>}
     </div>
+       </div>
   );
 }

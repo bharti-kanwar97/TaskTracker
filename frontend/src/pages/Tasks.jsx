@@ -25,8 +25,8 @@ export default function Tasks() {
 
  
   return (
-    <div>
-      <div className="flex justify-between items-center py-2 my-2 px-4 sm:px-8">
+    <div className="bg-white relative min-w-0 overflow-x-hidden">
+      <div className="flex justify-between items-center py-4 px-4 sm:px-10 relative">
         <h1 className="text-4xl font-semibold text-[#0F172A] dark:text-white">
           Tasks
         </h1>
@@ -45,7 +45,7 @@ export default function Tasks() {
       </div>
       
       <div className=" px-4 sm:px-8">
-        <div className="bg-white dark:bg-[#0F172A] flex justify-end sm:justify-between items-center shadow-2xl border-2 border-gray-300 dark:border-gray-600 w-[98%] py-3 px-5 mx-auto rounded-lg">
+        <div className=" dark:bg-[#0F172A] flex justify-end sm:justify-between items-center shadow-2xl border-2 border-gray-300 dark:border-gray-600 w-[98%] py-3 px-5 mx-auto rounded-lg bg-white">
           <div className="hidden sm:flex">
             {links.map((link) => (
               <NavLink
@@ -57,21 +57,23 @@ export default function Tasks() {
             </NavLink> 
             ))}
           </div>
+   
        
  <div className="flex items-center justify-center gap-0.5 sm:gap-2">
-    <button
+    <button 
             onClick={() => {
     console.log("Clicked");
     setOpenForm(true);
+    
   }}
-            className="flex sm:hidden items-center justify-center hover:bg-blue-900 hover:text-white  text-neutral-900 p-1 rounded-full cursor-pointer"
+            className="flex sm:hidden items-center justify-center hover:bg-blue-900 hover:text-white  text-neutral-900 p-1 rounded-full cursor-pointer z-0"
           >
             <MdAdd className="text-[24px]" />
           </button>
  <button
             aria-label="delete all tasks"
             onClick={() => {setOpenDialog(true)}}
-            className="mx-0.5"
+            className="mx-0.5 flex sm:hidden"
           >
             <MdDeleteSweep className="cursor-pointer text-[24px] sm:text-[30px] hover:text-[#991B1B] text-[#B91C1C]" />
           </button>
@@ -85,14 +87,13 @@ export default function Tasks() {
         >
           <MdOutlineMoreHoriz className="text-[24px] " />
         </button>
-        {openLinks && <MoreLinks />}
+        {openLinks && <MoreLinks setOpenLinks={setOpenLinks} />}
  </div>
          
       
-        </div>
          
       </div>
-
+</div>
       <Outlet />
  {openForm && <TaskForm />}
  {openSettings && <Settings />}

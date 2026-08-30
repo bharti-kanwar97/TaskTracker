@@ -14,6 +14,7 @@ import CustomTooltip from "../components/Tooltip";
 import { FiSidebar } from "react-icons/fi";
 import SidebarContext from "../context/SidebarContext";
 import useLoginUser from "../hooks/useLoginUser";
+import useMediaQuery from "../hooks/useMediaQuery";
 export default function SideNav({ className }) {
   const { formData } = useLoginUser();
   // const {handleFetch} = useRegisterData()
@@ -24,13 +25,14 @@ export default function SideNav({ className }) {
     {name: "Tasks", path: "/home/tasks", icon: <MdOutlineListAlt />},
     {name: "Calender", path: "/home/calender", icon: <MdCalendarMonth />}
   ]
+  const isMobile = useMediaQuery("(max-width: 767px)");
   return (
     <>
-      {sideBarOpen && (
+      {/* {sideBarOpen && ( */}
         <div
-          className={`${className} bg-white border-r-2 border-gray-200 dark:border-gray-700 min-h-screen w-full`}
+          className={`${className} border-r-2 border-gray-200 dark:border-gray-700 min-h-screen w-full `}
         >
-          <div className="flex justify-between items-center py-2 my-2">
+          <div className="flex justify-between items-center py-4">
             <div className="">
               <button
                 onClick={() => {
@@ -71,9 +73,10 @@ export default function SideNav({ className }) {
               </button>
             </li>
              {links.map((link) => (
-             <li className="" key={link.path}>
+             <li className="" key={link.path}   onClick={() => isMobile && setSideBarOpen(false)}>
               <NavLink
                 to={link.path}
+                
                 className={({isActive}) =>`dark:hover:bg-[#263a6a] homelink dark:text-gray-200 dark:bg-[#0F172A] ${isActive ? "dark:bg-[#1d2e55]" : "dark:bg-[#0F172A]"}`}
               >
                 <span className="text-[22px]">{link.icon}</span>
@@ -89,7 +92,7 @@ export default function SideNav({ className }) {
             {/* <li className=""><Link to="/home/homeDashboard" className="dark:hover:bg-[#263a6a] homelink dark:text-gray-200 dark:bg-[#0F172A]"><IoStatsChartOutline className='text-[22px]' /><span>Home</span></Link> </li> */}
           </ul>
         </div>
-      )}
+      {/* )} */}
     </>
   );
 }

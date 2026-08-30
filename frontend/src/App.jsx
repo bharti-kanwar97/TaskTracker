@@ -25,8 +25,10 @@ import TaskForm from './forms/TaskForm.jsx';
 function App() {
     
   const [openForm, setOpenForm] = useState(false);
-  const [sideBarOpen, setSideBarOpen] = useState(true);
+  const [sideBarOpen, setSideBarOpen] = useState(() =>
+  window.matchMedia("(min-width: 1024px)").matches);
   const [openSettings, setOpenSettings] = useState(false)
+   const [activeTaskId, setActiveTaskId] = useState(null);
   const [state, dispatch] = useReducer(taskReducer, initialState);
   const [formState, dispatchForm] = useReducer(taskFormReducer, initialFormState);
   const [theme, setTheme] = useState(() => {
@@ -39,13 +41,26 @@ function App() {
   useEffect(() => {
   document.documentElement.classList.toggle("dark", theme === "dark");
 }, [theme]);
+useEffect(() => {
+  const mediaQuery = window.matchMedia("(min-width: 1024px)");
+
+  const handleScreenChange = (e) => {
+    setSideBarOpen(e.matches);
+  };
+
+  mediaQuery.addEventListener("change", handleScreenChange);
+
+  return () => {
+    mediaQuery.removeEventListener("change", handleScreenChange);
+  };
+}, []);
   return (
     <div>
     
       <ThemeContext.Provider value={{ theme, setTheme }}>
         <SettingsContext.Provider value={{openSettings,setOpenSettings}}>
         <TaskFormContext.Provider value={{formState,openForm,setOpenForm,dispatchForm}}>
-        <TaskContext.Provider value={{taskList: state.taskList,dispatch }}>
+        <TaskContext.Provider value={{activeTaskId, setActiveTaskId, taskList: state.taskList,dispatch }}>
         <SidebarContext.Provider value={{sideBarOpen,setSideBarOpen}}>
   <Toaster>
      {(t) => (

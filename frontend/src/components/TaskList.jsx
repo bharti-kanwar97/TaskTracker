@@ -1,12 +1,12 @@
 import Complete from "../TaskStatus/Complete";
 import TaskItem from "./TaskItem";
-import { Fragment } from "react";
+import TaskHeader from "../components/TaskHeader";
 import usePagination from "../hooks/usePagination";
 import ReactPaginate from "react-paginate";
 import {TaskContext}  from "../context/TaskContext";
 import {useContext} from 'react';
 export default function TaskList() {
-  const {taskList} = useContext(TaskContext)
+  const {taskList,activeTaskId,setActiveTaskId,} = useContext(TaskContext)
   const {currentTasks,handlePageClick,pageCount} = usePagination(taskList)
 
   return (
@@ -18,16 +18,8 @@ export default function TaskList() {
               No tasks are found
             </p>
           ) : (
-            <div className="group text-slate-800 dark:text-white bg-gray-100 dark:bg-[#131e3b] border-2 border-gray-200 dark:border-gray-600 rounded-[10px] ">
-              <div className=" grid grid-cols-2 sm:grid-cols-4 text-center bg-neutral-800 dark:bg-[#0B1223] dark:text-white text-gray-200 font-semibold  py-3 px-7 rounded-t-[10px]">
-                <div className="text-[16px]">Task Name</div>
-               
-                <div className="text-[16px] hidden sm:grid">Due Date</div>
-                <div className="text-[16px] hidden sm:grid">Category</div>
-                <div className="text-center text-[16px] hidden sm:grid">Actions</div>
-                <div className="grid sm:hidden"></div>
-
-              </div>
+            <div className=" text-slate-800 dark:text-white bg-gray-100 dark:bg-[#131e3b] border-2 border-gray-200 dark:border-gray-600 rounded-[10px] ">
+              <TaskHeader />
 
               {currentTasks.map((task) => {
                
@@ -38,7 +30,7 @@ export default function TaskList() {
                       className="border-b-1 border-neutral-500 py-1.5 "
                     >
                       <TaskItem
-                        task={task}
+                        task={task} activeTaskId={activeTaskId} setActiveTaskId={setActiveTaskId}
                       />
                     </div>
                   </>
