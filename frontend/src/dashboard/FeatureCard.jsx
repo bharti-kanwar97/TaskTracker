@@ -37,6 +37,7 @@ function FeatureCard({card,isDark}) {
                   custom={card.colorMotion}
                   initial="initial"
                   whileHover="hover"
+                  whileTap="hover"
                   transition={{ duration: 0.3 }}
                 >
                   <motion.div variants={iconVariants} custom={isDark}>

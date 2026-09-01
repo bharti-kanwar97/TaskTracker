@@ -7,8 +7,8 @@ function Nav() {
   const [open,setOpen] = useState(false)
   return (
     <>
-      <header className="">
-        <nav className="relative flex justify-between items-center px-6 sm:px-20 py-4 sm:py-6 border-b-[1px]  border-gray-200 dark:border-neutral-700 ">
+      <header className="relative">
+        <nav className="flex justify-between items-center px-6 sm:px-20 py-4 sm:py-6 border-b-[1px]  border-gray-200 dark:border-neutral-700 ">
           <div>
             <h2 className="text-[#1A4560] dark:text-white  font-[600] text-[20px] sm:text-2xl">
               Task Tracker
@@ -35,14 +35,15 @@ function Nav() {
               </Link>
             </div>
           </div>
-        {open === false ? (<div onClick={() => setOpen(!open)}  className=" md:flex lg:hidden">
+        {open === false ? (<div onClick={() => setOpen(!open)}  className=" flex lg:hidden">
             <GiHamburgerMenu className="text-[18px] sm:text-2xl text-[#1A4560] dark:text-white" />
-          </div> ) : (<div onClick={() => setOpen(!open)} className=" md:flex lg:hidden">
+          </div> ) : (<div onClick={() => setOpen(!open)} className=" flex lg:hidden">
             <IoClose className="text-[18px] sm:text-2xl text-[#1A4560] dark:text-white" />
            
           </div>)  } 
          {open === true && (
-          <div className="dark:bg-[#0F172A] bg-white h-screen w-[90%] absolute top-18 text-center py-5">
+          // <div className="dark:bg-[#0F172A] bg-red-500 h-screen absolute top-18 text-center py-5">
+          <div className="dark:bg-[#0F172A] bg-white h-screen z-100 absolute top-16 md:top-20 w-[100%] right-0 text-center py-5">
             <div className="dark:text-white text-black py-2"><Link to="/login">Login</Link></div>
             <div className="dark:text-white text-black py-2"><Link to="/register">Signup</Link></div>
             <div className=" py-2"><ThemeButton /></div>
