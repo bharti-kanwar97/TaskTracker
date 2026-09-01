@@ -5,8 +5,8 @@ import axios from "axios";
 // create axios instance
 export const api = axios.create({
   // baseURL:"https://tasktracker-backend-fawn.vercel.app/api/v1"
-  // baseURL: import.meta.env.VITE_API_URL,
-  baseURL:"http://localhost:3000/api/v1/"
+  baseURL: import.meta.env.VITE_API_URL,
+  // baseURL:"http://localhost:3000/api/v1/"
 });
 
 // call axios  request interceptor
