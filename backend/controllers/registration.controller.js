@@ -52,9 +52,9 @@ export const login = async (req, res) =>{
    
    
     // Get user's tasks
-    const tasks = await trackers.find({
-      user: user._id
-    });
+   //  const tasks = await trackers.find({
+   //    user: user._id
+   //  });
       res.status(200).json({
          success: true,
          message: 'User logged in successfully',
@@ -64,7 +64,7 @@ export const login = async (req, res) =>{
             name: user.name,
             email: user.email
          },
-           tasks
+         //   tasks
       })
    }
    catch(error){
