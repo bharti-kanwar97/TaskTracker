@@ -37,11 +37,18 @@ export const getRegisterUser = async(req, res) => {
 
 export const login = async (req, res) =>{
    const {email, password} = req.body;
+     console.time("LOGIN TOTAL");
    try{
+      console.time("FIND USER");
       const user = await registrations.findOne({email});
+      console.timeEnd("FIND USER");
       if(!user) return res.status(401).json({message: 'Invalid credentials'})
+             console.time("BCRYPT");
         const isMatch = await bcrypt.compare(password, user.password)
+        console.timeEnd("BCRYPT");
         if(!isMatch) return res.status(400).json({message: 'Invalid credentials'})
+
+    console.time("JWT");
          const token = jwt.sign(
       {id: user._id},
       process.env.JWT_SECRET,
@@ -49,7 +56,9 @@ export const login = async (req, res) =>{
          expiresIn: '7d'
       }
     )
-   
+    console.timeEnd("JWT");
+
+    console.timeEnd("LOGIN TOTAL");
    
     // Get user's tasks
    //  const tasks = await trackers.find({
@@ -69,6 +78,12 @@ export const login = async (req, res) =>{
    }
    catch(error){
       console.log(error);
+       console.timeEnd("LOGIN TOTAL");
+
+    res.status(500).json({
+      success: false,
+      message: "Server error"
+    });
    }
 }
 
