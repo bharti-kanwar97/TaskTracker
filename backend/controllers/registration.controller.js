@@ -2,7 +2,7 @@ import registrations from '../models/registration.model.js';
 import trackers from '../models/tracker.model.js';
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-import {connectDB} from './config/db.js'
+import {connectDB} from '../config/db.js'
 export const register = async(req, res) => {
      try{
       const {name, email, password, confirmPassword} = req.body;
