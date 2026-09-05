@@ -24,6 +24,29 @@ export default function Calender() {
       completed: task.completed,
     },
   }));
+  const touchStartX = useRef(null);
+const touchEndX = useRef(null);
+
+const handleTouchStart = (e) => {
+  touchStartX.current = e.touches[0].clientX;
+};
+
+const handleTouchEnd = (e) => {
+  touchEndX.current = e.changedTouches[0].clientX;
+
+  const distance =
+    touchStartX.current - touchEndX.current;
+
+  // Swipe left → next month
+  if (distance > 50) {
+    calendarRef.current.getApi().next();
+  }
+
+  // Swipe right → previous month
+  if (distance < -50) {
+    calendarRef.current.getApi().prev();
+  }
+};
   useEffect(() => {
     const calendar = calendarRef.current?.getApi();
 
@@ -38,15 +61,15 @@ export default function Calender() {
 
   return (
     <div className="h-[calc(100vh-56px)] dark:bg-[#0F172A] py-8 bg-white min-w-0 w-full">
-      <div className="w-[100%] sm:px-10 mx-auto">
+      <div onTouchStart={handleTouchStart}
+  onTouchEnd={handleTouchEnd} 
+  className="w-[100%] sm:px-10 mx-auto">
         <FullCalendar
           ref={calendarRef}
           height="650px"
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
-          // Mobile touch/swipe
-          handleWindowResize={true}
-          longPressDelay={100}
+          
           headerToolbar={{
             left: "prev,next today",
             center: "title",
