@@ -1,12 +1,9 @@
-import {useState,useEffect} from 'react'
+import {useState} from 'react'
 import {itemsPerPage} from '../constants/pagination'
 export default function usePagination(tasks){
       //  const itemsPerPage = 5;
     const [itemOffset, setItemOffset] = useState(0);
-    // Reset to first page whenever tasks change
-  useEffect(() => {
-    setItemOffset(0);
-  }, [tasks]);
+  
     const endOffset = itemOffset + itemsPerPage;
     
     const reversedTasks = [...tasks].reverse();
@@ -20,5 +17,5 @@ export default function usePagination(tasks){
     
       setItemOffset(newOffset);
     };
-    return {currentTasks,handlePageClick,pageCount}
+    return {currentTasks,handlePageClick,pageCount,currentPage: itemOffset / itemsPerPage}
 }

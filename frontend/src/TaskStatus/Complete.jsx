@@ -3,10 +3,13 @@ import usePagination from "../hooks/usePagination";
 import useDeleteTask from '../hooks/useDeleteTask';
 import useTaskAction from '../hooks/useTaskAction';
 import TaskHeader from "../components/TaskHeader";
-function Complete() {
-
+import { useContext } from "react";
+import SidebarContext from "../context/SidebarContext";
+import Pagination from "../components/Pagination";
+function Complete({ showCompletedDate = true}) {
+  const {sideBarOpen} = useContext(SidebarContext)
 const {completedTask} = useTaskAction()
-  const {currentTasks,handlePageClick,pageCount} = usePagination(completedTask)
+  const {currentTasks,handlePageClick,pageCount,currentPage} = usePagination(completedTask)
   
   const {handleDelete} = useDeleteTask()
   return (
@@ -20,22 +23,21 @@ const {completedTask} = useTaskAction()
             </p>
           ) : 
         (<div className=" text-slate-800 dark:text-white bg-gray-100 dark:bg-[#131e3b] border-2 border-gray-200 dark:border-gray-600 rounded-[10px] ">
-        {/* <div className=" grid grid-cols-5 text-center bg-neutral-800 dark:bg-[#0B1223] dark:text-white text-gray-200 font-semibold py-3 px-7 rounded-t-[10px]">
-                <div className="text-[16px]">Task Name</div>
-                <div className="text-[16px]">Due Date</div>
-                 <div className="text-[16px]">Complete Date</div>
-                <div className="text-[16px]">Status</div>
-                <div className="text-center text-[16px]">Actions</div>
-              </div> */}
                <TaskHeader showCompletedDate />
-        <div className="pt-2 text-slate-800 card sm:px-4">
+        <div className="pt-2 text-slate-800 sm:px-4">
      {currentTasks.map((task) => (
       <div
         key={task._id}
-        className="grid grid-cols-2 sm:grid-cols-5 text-center bg-gray-100 dark:bg-[#131e3b] font-semibold p-3 rounded-lg"
+        className={`grid grid-cols-2  ${sideBarOpen ? "sm:grid-cols-3" : "sm:grid-cols-5"} lg:grid-cols-5 text-center bg-gray-100 dark:bg-[#131e3b] font-semibold p-3 border-b-1 border-neutral-500`}
       >
         <span className="w-full py-2 text-[15px] font-medium dark:text-white line-through">{task.taskName}</span>
-         <div className="hidden sm:flex items-center justify-center text-[15px] font-medium dark:text-white">
+       <div
+  className={`hidden ${
+    showCompletedDate && sideBarOpen
+      ? "sm:hidden"
+      : "sm:grid"
+  } items-center justify-center text-[15px] font-medium dark:text-white lg:grid`}
+>
         {new Date(task.dueDate)
           .toLocaleDateString("en-IN", {
             day: "2-digit",
@@ -53,7 +55,8 @@ const {completedTask} = useTaskAction()
           })
           .replace(/-/g, " ")}
       </div>
-         <div className="hidden sm:flex items-center justify-center text-[15px] font-medium dark:text-white">{task.category}</div>
+         {/* <div className="hidden sm:flex items-center justify-center text-[15px] font-medium dark:text-white">{task.category}</div> */}
+         <div className={`text-[15px]  items-center justify-center font-medium dark:text-white hidden  ${sideBarOpen ? "sm:hidden lg:flex" : "sm:flex"}`}>{task.category}</div>
         <div className="w-auto px-2 flex gap-2 items-center justify-center">
          
 
@@ -69,36 +72,10 @@ const {completedTask} = useTaskAction()
     </div>
   
         <div className="flex justify-center py-6">
-  <ReactPaginate
-    breakLabel="..."
-    nextLabel="Next >"
-    previousLabel="< Prev"
-    onPageChange={handlePageClick}
-    pageRangeDisplayed={3}
-    marginPagesDisplayed={1}
-    pageCount={pageCount}
-    renderOnZeroPageCount={null}
-
-    containerClassName="flex gap-2 items-center"
-
-    pageClassName="border rounded"
-
-    pageLinkClassName="px-4 py-2 block"
-
-    activeClassName="bg-[#1A4560] text-white rounded"
-
-    previousClassName="border rounded"
-
-    previousLinkClassName="px-4 py-2 block"
-
-    nextClassName="border rounded"
-
-    nextLinkClassName="px-4 py-2 block"
-
-    breakClassName="px-3 py-2"
-
-    disabledClassName="opacity-50 cursor-not-allowed"
-  />
+          <Pagination pageCount={pageCount}
+  handlePageClick={handlePageClick}
+  currentPage={currentPage} />
+  
 </div>
 </div>)}
     </div>

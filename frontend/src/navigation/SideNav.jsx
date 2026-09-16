@@ -28,9 +28,9 @@ export default function SideNav({ className }) {
   const isMobile = useMediaQuery("(max-width: 767px)");
   return (
     <>
-      {/* {sideBarOpen && ( */}
+    
         <div
-          className={`${className} border-r-2 border-gray-200 dark:border-gray-700 min-h-screen w-full `}
+          className={`${className} dark:border-gray-700 min-h-screen w-full `}
         >
           <div className="flex justify-between items-center py-4">
             <div className="">
@@ -42,7 +42,6 @@ export default function SideNav({ className }) {
                 }}
                 className="dark:hover:bg-[#263a6a] homelink dark:text-gray-200 dark:bg-[#0F172A] cursor-pointer"
               >
-                {/* <IoSettingsOutline className='text-[22px]' /> */}
                 <div className="inline-block px-1.5 py-0.5 rounded-full bg-[#98be2f] text-white width-auto text-xs">
                   {formData?.name?.charAt(0).toUpperCase()}
                 </div>
@@ -86,13 +85,9 @@ export default function SideNav({ className }) {
             </li>
 
              ))}
-
-
-            {/* This is in a implementing mode */}
-            {/* <li className=""><Link to="/home/homeDashboard" className="dark:hover:bg-[#263a6a] homelink dark:text-gray-200 dark:bg-[#0F172A]"><IoStatsChartOutline className='text-[22px]' /><span>Home</span></Link> </li> */}
           </ul>
         </div>
-      {/* )} */}
+  
     </>
   );
 }

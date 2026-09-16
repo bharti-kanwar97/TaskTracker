@@ -5,9 +5,10 @@ import usePagination from "../hooks/usePagination";
 import ReactPaginate from "react-paginate";
 import {TaskContext}  from "../context/TaskContext";
 import {useContext} from 'react';
+import Pagination from "./Pagination";
 export default function TaskList() {
   const {taskList,activeTaskId,setActiveTaskId,} = useContext(TaskContext)
-  const {currentTasks,handlePageClick,pageCount} = usePagination(taskList)
+  const {currentTasks,handlePageClick,pageCount,currentPage} = usePagination(taskList)
 
   return (
     <>
@@ -38,26 +39,9 @@ export default function TaskList() {
               })}
 
               <div className=" py-[22px] static bottom-0  left-120 w-fit mx-auto ">
-                <ReactPaginate
-                  breakLabel="..."
-                  nextLabel="Next >"
-                  previousLabel="< Prev"
-                  onPageChange={handlePageClick}
-                  pageRangeDisplayed={3}
-                  marginPagesDisplayed={1}
-                  pageCount={pageCount}
-                  renderOnZeroPageCount={null}
-                  containerClassName="flex gap-2 items-center"
-                  pageClassName="border rounded"
-                  pageLinkClassName="px-4 py-2 block"
-                  activeClassName="bg-[#1A4560] text-white rounded"
-                  previousClassName="border rounded"
-                  previousLinkClassName="px-4 py-2 block"
-                  nextClassName="border rounded"
-                  nextLinkClassName="px-4 py-2 block"
-                  breakClassName="px-3 py-2"
-                  disabledClassName="opacity-50 cursor-not-allowed"
-                />
+                <Pagination pageCount={pageCount}
+  handlePageClick={handlePageClick}
+  currentPage={currentPage} />
               </div>
             </div>
           )}

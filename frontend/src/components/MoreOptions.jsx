@@ -1,8 +1,11 @@
 import React from 'react'
 import useDeleteTask from '../hooks/useDeleteTask';
 import useTaskForm from '../hooks/useTaskForm';
+import SidebarContext from '../context/SidebarContext.js'
+import {useContext} from "react"
 function MoreOptions({task,setMoreOption}) {
       const {handleDelete} = useDeleteTask()
+      // const {sideBarOpen} = useContext(SidebarContext);
       const {handleUpdate} = useTaskForm();
   return (
     <div>

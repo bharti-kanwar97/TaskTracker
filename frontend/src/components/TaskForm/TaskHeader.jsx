@@ -10,7 +10,6 @@ function TaskHeader() {
             onClick={closeTab}
             className="absolute top-4 right-4 text-3xl text-gray-500 dark:text-neutral-50 hover:text-black dark:hover:text-neutral-200"
           >
-            {/* ✕ */}
             <MdClose />
           </button>
 

@@ -73,7 +73,7 @@ export default function Tasks() {
  <button
             aria-label="delete all tasks"
             onClick={() => {setOpenDialog(true)}}
-            className="mx-0.5 flex sm:hidden"
+            className="mx-0.5 flex p-1"
           >
             <MdDeleteSweep className="cursor-pointer text-[24px] sm:text-[30px] hover:text-[#991B1B] text-[#B91C1C]" />
           </button>
@@ -83,7 +83,7 @@ export default function Tasks() {
             console.log("click on more option button");
             setOpenLinks(!openLinks)
           }}
-           className="mx-0.5 flex sm:hidden relative"
+           className="mx-0.5 flex sm:hidden relative p-1"
         >
           <MdOutlineMoreHoriz className="text-[24px] " />
         </button>
