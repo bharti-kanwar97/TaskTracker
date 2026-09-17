@@ -2,54 +2,79 @@ import React from 'react'
 // import usePagination from "../hooks/usePagination";
 import ReactPaginate from "react-paginate";
 
-function Pagination({handlePageClick,pageCount}) {
-   
+function Pagination({ pageCount, currentPage, handlePageClick }) {
+   const getMobilePages = () => {
+    if (pageCount <= 3) {
+      return Array.from({ length: pageCount }, (_, i) => i);
+    }
+
+    if (currentPage === 0) {
+      return [0, 1, 2];
+    }
+
+    if (currentPage === pageCount - 1) {
+      return [pageCount - 3, pageCount - 2, pageCount - 1];
+    }
+
+    return [currentPage, currentPage + 1, currentPage + 2];
+  };
+
+  const mobilePages = getMobilePages();
      
   return (
     <>
-      <div className='sm:hidden'>
-      <ReactPaginate
-    breakLabel="..."
-     previousLabel={
-    <span className="flex items-center gap-1">
-      <span>&lt;</span>
-      <span className="hidden sm:inline">Prev</span>
-    </span>
-  }
-  nextLabel={
-    <span className="flex items-center gap-1">
-      <span className="hidden sm:inline">Next</span>
-      <span>&gt;</span>
-    </span>
-  }
-    onPageChange={handlePageClick}
-    pageRangeDisplayed={3}
-    marginPagesDisplayed={0}
-    pageCount={pageCount}
-    renderOnZeroPageCount={null}
+       {/* MOBILE */}
+      <div className="flex sm:hidden items-center gap-2">
 
-    containerClassName="flex gap-2 items-center"
+        {/* Previous */}
+        <button
+          disabled={currentPage === 0}
+          onClick={() =>
+            handlePageClick({ selected: currentPage - 1 })
+          }
+          className="border rounded px-3 py-2 disabled:opacity-50"
+        >
+          &lt;
+        </button>
 
-    pageClassName="border rounded"
+        {/* 3 page numbers */}
+        {mobilePages.map((page) => (
+          <button
+            key={page}
+            onClick={() =>
+              handlePageClick({ selected: page })
+            }
+            className={`border rounded px-4 py-2 ${
+              currentPage === page
+                ? "bg-[#1A4560] text-white"
+                : ""
+            }`}
+          >
+            {page + 1}
+          </button>
+        ))}
 
-    pageLinkClassName="px-4 py-2 block"
+        {/* ... */}
+        {currentPage < pageCount - 3 && (
+          <span className="px-2">...</span>
+        )}
 
-    activeClassName="bg-[#1A4560] text-white rounded"
+        {/* Next */}
+        <button
+          disabled={currentPage === pageCount - 1}
+          onClick={() =>
+            handlePageClick({ selected: currentPage + 1 })
+          }
+          className="border rounded px-3 py-2 disabled:opacity-50"
+        >
+          &gt;
+        </button>
 
-    previousClassName="border rounded"
+      </div>
 
-    previousLinkClassName="px-4 py-2 block"
 
-    nextClassName="border rounded"
-
-    nextLinkClassName="px-4 py-2 block"
-
-    breakClassName="px-3 py-2"
-
-    disabledClassName="opacity-50 cursor-not-allowed"
-  />
-    </div>
-      <div className="hidden sm:block">
+      {/* DESKTOP */}
+      <div className="hidden sm:flex">
         <ReactPaginate
           breakLabel="..."
           previousLabel={
@@ -65,7 +90,7 @@ function Pagination({handlePageClick,pageCount}) {
             </span>
           }
           onPageChange={handlePageClick}
-          pageRangeDisplayed={5}
+          pageRangeDisplayed={3}
           marginPagesDisplayed={1}
           pageCount={pageCount}
           renderOnZeroPageCount={null}

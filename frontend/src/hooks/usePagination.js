@@ -17,5 +17,6 @@ export default function usePagination(tasks){
     
       setItemOffset(newOffset);
     };
-    return {currentTasks,handlePageClick,pageCount,currentPage: itemOffset / itemsPerPage}
+    const currentPage = Math.floor(itemOffset / itemsPerPage);
+    return {currentTasks,handlePageClick,pageCount,currentPage}
 }

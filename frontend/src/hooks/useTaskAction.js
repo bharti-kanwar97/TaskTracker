@@ -18,7 +18,7 @@ export default function useTaskAction() {
     payload: response.data
 });
     } catch (error) {
-      console.log(error);
+      console.error("Error fetching tasks:",error);
     }
   }; 
   // filter pending tasks
